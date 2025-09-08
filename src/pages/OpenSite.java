@@ -42,6 +42,8 @@ public class OpenSite {
         	WebElement inputBoxinNewWindow=driver.findElement(By.xpath("//h1[@class='post-title entry-title']"));
         
         	inputBoxinNewWindow.sendKeys("Arnav");
+        	
+        	System.out.println("Testing Updates for Git");
         
         	Thread.sleep(5000);
         
