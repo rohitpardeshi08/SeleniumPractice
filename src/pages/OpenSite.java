@@ -26,29 +26,41 @@ public class OpenSite {
         driver.get("https://www.hyrtutorials.com/p/window-handles-practice.html");
         
         driver.manage().window().maximize();
+        
+        String parentWindow=driver.getWindowHandle();
+        
+        WebElement newWindowBtn=driver.findElement(By.xpath("//button[@id='newWindowBtn']"));
+        
+        newWindowBtn.click();
+        
+        Thread.sleep(10000);
+        
         try {
+        
+        	Set<String> allWindows=driver.getWindowHandles();
         	
-        
-        	WebElement newWindowBtn=driver.findElement(By.xpath("//button[@id='newWindowBtn']"));
-        
-        	newWindowBtn.click();
-        
-        	String windowHandles=driver.getWindowHandle();
-        
-        	driver.switchTo().window(windowHandles);
+        	for(String allWindowsString:allWindows)
+        	{
         	
-        	Thread.sleep(5000);
+        		if(!allWindowsString.equals(parentWindow))
+        		{
+        			
+        			driver.switchTo().window(allWindowsString);
+        		
+        			driver.manage().window().maximize();
+        		
+        			WebElement inputBoxinNewWindow=driver.findElement(By.id("firstName"));
         
-        	WebElement inputBoxinNewWindow=driver.findElement(By.xpath("//h1[@class='post-title entry-title']"));
-        
-        	inputBoxinNewWindow.sendKeys("Arnav");
+        			inputBoxinNewWindow.sendKeys("Arnav");
         	
-        	System.out.println("Testing Updates for Git");
+        			System.out.println("Testing Updates for Git");
         
-        	Thread.sleep(5000);
+        			Thread.sleep(2000);
         
-        	driver.quit();
+        			driver.quit();
+        		}
         }
+     }
         catch(Exception e)
         {
         	System.out.println("Exception is"+e);
